@@ -1,10 +1,14 @@
 package com.gamedoora.backend.userservices.repository;
 
-import com.gamedoora.model.dao.User;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.gamedoora.model.dao.Users;
+
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
-    User findByEmail(String email);
+public interface UsersRepository extends JpaRepository<Users, Long> {
+
+	List<Users> findByEmailContaining(String name);
 }

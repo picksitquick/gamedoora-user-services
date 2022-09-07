@@ -1,4 +1,4 @@
-package com.gamedoora.auth.exceptions;
+package com.gamedoora.backend.userservices.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.gamedoora.model.dao.Roles;
+import com.gamedoora.model.dao.Sources;
 
 @Repository
-public interface RolesRepository extends JpaRepository<Roles, Long> {
+public interface SourcesRepository extends JpaRepository<Sources, Long> {
 
-	List<Roles> findByNameContaining(String name);
+	List<Sources> findByNameContaining(String name);
 }
