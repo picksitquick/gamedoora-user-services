@@ -20,7 +20,7 @@ import com.gamedoora.backend.userservices.dto.SourceDTO;
 import com.gamedoora.model.dao.Sources;
 
 @RestController
-public class SourcesServicesController implements BaseController {
+public class SourcesServicesController extends BaseController {
 
 	@Autowired
 	SourcesServicesAssembler sourcesServicesAssembler;

@@ -36,6 +36,11 @@
    
         </dependency>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        
+        </dependency>
+        <dependency>
             <groupId>com.gamedoora</groupId>
             <artifactId>gamedoora-model</artifactId>
             <version>0.2.0</version>

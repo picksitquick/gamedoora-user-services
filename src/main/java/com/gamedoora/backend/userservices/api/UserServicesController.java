@@ -22,7 +22,7 @@ import com.gamedoora.model.dao.Skills;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserServicesController implements BaseController {
+public class UserServicesController extends BaseController {
 
 	@Autowired
 	SkillsServicesAssembler skillsServicesAssembler;
