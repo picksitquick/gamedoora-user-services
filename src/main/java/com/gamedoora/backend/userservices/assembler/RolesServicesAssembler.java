@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import com.gamedoora.backend.userservices.dto.RoleDTO;
@@ -47,25 +45,18 @@ public class RolesServicesAssembler {
   }
 
   public void deleteRoles(long id) {
-   rolesRepository.deleteById(id);
+    rolesRepository.deleteById(id);
   }
 
-  public ResponseEntity<HttpStatus> deleteAllRoles() {
-    try {
-      rolesRepository.deleteAll();
-      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    } catch (Exception e) {
-      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+  public void deleteAllRoles() {
+    rolesRepository.deleteAll();
   }
 
   public List<Roles> getAllRoles(String name) {
-         List<Roles> roles = new ArrayList<>();
-      if (name == null) rolesRepository.findAll().forEach(roles::add);
-      else rolesRepository.findByNameContaining(name).forEach(roles::add);
-      if (roles.isEmpty()) {
-        return null;
-      }
-      return roles;
+    List<Roles> roles = new ArrayList<>();
+    if (name == null) rolesRepository.findAll().forEach(roles::add);
+    else rolesRepository.findByNameContaining(name).forEach(roles::add);
+
+    return roles;
   }
 }

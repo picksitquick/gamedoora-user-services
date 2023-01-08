@@ -29,8 +29,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
     transactionManagerRef = "primaryTransactionManager")
 public class RelationalDbConfig {
   private PropertiesConfig propertiesConfig;
-  
-    @Bean(name="primaryDs")
+   
+   @Primary
+   @Bean(name="primaryDs")
     public DataSource primaryDataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName(getPropertiesConfig().getPrimaryDbDriver());
@@ -42,7 +43,7 @@ public class RelationalDbConfig {
     }
     @Primary
     @Bean(name = "primaryEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("primaryDataSource") DataSource primaryDataSource, EntityManagerFactoryBuilder builder) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("primaryDs") DataSource primaryDataSource, EntityManagerFactoryBuilder builder) {
     return builder
         .dataSource(primaryDataSource)
         .properties(Maps.fromProperties(additionalProperties()))

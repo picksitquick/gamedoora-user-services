@@ -19,20 +19,23 @@ import com.gamedoora.backend.userservices.dto.RoleDTO;
 import com.gamedoora.backend.userservices.exceptions.NotFoundException;
 import com.gamedoora.model.dao.Roles;
 import java.text.MessageFormat;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
+@RequestMapping("/roles")
 public class RolesServicesController extends BaseController {
 
 	@Autowired
 	RolesServicesAssembler rolesServicesAssembler;
 
-	@PostMapping(value = "/")
+	@PostMapping(value = "/", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces =  {MediaType.APPLICATION_JSON_VALUE} )
 	public ResponseEntity<RoleDTO> createRoles(@RequestBody RoleDTO rolesDto) {
 		return createResponse(rolesServicesAssembler.createRoles(rolesDto), HttpStatus.CREATED);
 
 	}
 
-	@PutMapping("/roles/{id}")
+	@PutMapping(value = "/{id}" , consumes = {MediaType.APPLICATION_JSON_VALUE}, produces =  {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<RoleDTO> updateRoles(@PathVariable("id") long id, @RequestBody RoleDTO rolesDto) {
 		RoleDTO roleDTO = rolesServicesAssembler.updateRoles(id, rolesDto);
     if(null == roleDTO){
@@ -41,19 +44,19 @@ public class RolesServicesController extends BaseController {
     return createResponse(roleDTO, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/roles/{id}")
+	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<HttpStatus> deleteRoles(@PathVariable("id") long id) {
 		 rolesServicesAssembler.deleteRoles(id);
      return createResponse(null, HttpStatus.NO_CONTENT);
 	}
 
-	@DeleteMapping("/")
+	@DeleteMapping(value = "/")
 	public ResponseEntity<HttpStatus> deleteAllRoles() {
 		rolesServicesAssembler.deleteAllRoles();
     return createResponse(null, HttpStatus.NO_CONTENT);
 	}
 
-	@GetMapping("/")
+	@GetMapping(value = "/", produces =  {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<List<Roles>> getAllRoles(@RequestParam(required = false) String name) {
 		return createResponse(rolesServicesAssembler.getAllRoles(name), HttpStatus.OK);
 	}

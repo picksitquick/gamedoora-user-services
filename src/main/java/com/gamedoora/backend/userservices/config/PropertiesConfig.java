@@ -89,6 +89,7 @@ public class PropertiesConfig {
   /**
    * @param hibernateHbm2ddl the hibernateHbm2ddl to set
    */
+  @Value("${userservice.db.primary.hbm2ddl.auto}")
   public void setHibernateHbm2ddl(String hibernateHbm2ddl) {
     this.hibernateHbm2ddl = hibernateHbm2ddl;
   }
@@ -103,6 +104,7 @@ public class PropertiesConfig {
   /**
    * @param hibernateDialect the hibernateDialect to set
    */
+  @Value("${userservice.db.primary.hibernate.dialect}")
   public void setHibernateDialect(String hibernateDialect) {
     this.hibernateDialect = hibernateDialect;
   }
