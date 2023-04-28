@@ -13,18 +13,18 @@ permissions:
 
 hooks:
   BeforeInstall:
-    - location: clear_artifacts.sh
+    - location: scripts/clear_artifacts.sh
       timeout: 300
       runas: ec2-user
   AfterInstall:
-    - location: set_privileges.sh
+    - location: scripts/set_privileges.sh
       timeout: 300
       runas: ec2-user
   ApplicationStart:
-    - location: service_start.sh
+    - location: scripts/service_start.sh
       timeout: 20
       runas: ec2-user
   ApplicationStop:
-    - location: service_stop.sh
+    - location: scripts/service_stop.sh
       timeout: 20
       runas: ec2-user
