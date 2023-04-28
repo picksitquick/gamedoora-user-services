@@ -1,10 +1,10 @@
 version: 0.2
 
 phases:
- pre_build:
-    commands:
-     - pip3 install awscli --upgrade --user
-     - export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain gamedoora --domain-owner 727903310356  --query authorizationToken --output text`
+  pre_build:
+     commands:
+      - pip3 install awscli --upgrade --user
+      - export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain gamedoora --domain-owner 727903310356  --query authorizationToken --output text`
      
   install:
     runtime-versions:
