@@ -12,7 +12,7 @@ permissions:
     group: ec2-user
 
 hooks:
-  BeforeInstall:
+  AfterInstall:
     - location: scripts/clear_artifacts.sh
       timeout: 300
       runas: ec2-user
