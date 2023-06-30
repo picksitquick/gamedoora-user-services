@@ -1,32 +1,45 @@
 package com.gamedoora.backend.userservices.assembler;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.gamedoora.model.mapper.RolesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.gamedoora.backend.userservices.dto.RoleDTO;
+import com.gamedoora.model.dto.RoleDTO;
 import com.gamedoora.backend.userservices.repository.RolesRepository;
 import com.gamedoora.model.dao.Roles;
 
 @Component
 public class RolesServicesAssembler {
 
-  @Autowired private RolesRepository rolesRepository;
+  private RolesRepository rolesRepository;
+
+  private RolesMapper rolesMapper;
+
+  public RolesRepository getRolesRepository() {
+    return rolesRepository;
+  }
+
+  @Autowired
+  public void setRolesRepository(RolesRepository rolesRepository) {
+    this.rolesRepository = rolesRepository;
+  }
+
+  @Autowired
+  public void setRolesMapper(RolesMapper rolesMapper){
+    this.rolesMapper = rolesMapper;
+  }
+
+  public RolesMapper getRolesMapper(){
+    return rolesMapper;
+  }
 
   public RoleDTO createRoles(RoleDTO rolesDto) {
 
-    Roles roles = new Roles();
-    roles.setName(rolesDto.getName());
-    roles.setDescription(rolesDto.getDescription());
-    roles.setCreatedBy("GameDoora");
-    roles.setUpdateBy("GameDoora");
-    roles.setCreatedOn(new Date());
-    roles.setUpdateOn(new Date());
-
+    Roles roles = rolesMapper.roleDtoToRoles(rolesDto);
     rolesRepository.save(roles);
     return rolesDto;
   }
@@ -45,18 +58,18 @@ public class RolesServicesAssembler {
   }
 
   public void deleteRoles(long id) {
-    rolesRepository.deleteById(id);
+    getRolesRepository().deleteById(id);
   }
 
   public void deleteAllRoles() {
-    rolesRepository.deleteAll();
+    getRolesRepository().deleteAll();
   }
 
-  public List<Roles> getAllRoles(String name) {
-    List<Roles> roles = new ArrayList<>();
-    if (name == null) rolesRepository.findAll().forEach(roles::add);
-    else rolesRepository.findByNameContaining(name).forEach(roles::add);
+  public List<RoleDTO> getAllRoles(String name) {
+    List<RoleDTO> roleDTOList = new ArrayList<>();
+    if (name == null) rolesRepository.findAll().forEach(roles -> roleDTOList.add(getRolesMapper().roleToRoleDto(roles)));
+    else rolesRepository.findByNameContaining(name).forEach(roles -> roleDTOList.add(getRolesMapper().roleToRoleDto(roles)));
 
-    return roles;
+    return roleDTOList;
   }
 }

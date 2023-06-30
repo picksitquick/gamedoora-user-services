@@ -1,8 +1,8 @@
 package com.gamedoora.backend.userservices.api;
 
 import com.gamedoora.backend.userservices.assembler.SourcesServicesAssembler;
-import com.gamedoora.backend.userservices.dto.SourceDTO;
-import com.gamedoora.model.dao.Sources;
+import com.gamedoora.model.dto.SourceDTO;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,7 +51,7 @@ public class SourcesServicesController extends BaseController {
   @GetMapping(
       value = "/",
       produces = {MediaType.APPLICATION_JSON_VALUE})
-  public ResponseEntity<List<Sources>> getAllSources(@RequestParam(required = false) String name) {
+  public ResponseEntity<List<SourceDTO>> getAllSources(@RequestParam(required = false) String name) {
     return createResponse(sourcesServicesAssembler.getAllSources(name), HttpStatus.OK);
 	}
 }

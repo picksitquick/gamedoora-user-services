@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gamedoora.backend.userservices.assembler.RolesServicesAssembler;
-import com.gamedoora.backend.userservices.dto.RoleDTO;
+import com.gamedoora.model.dto.RoleDTO;
 import com.gamedoora.backend.userservices.exceptions.NotFoundException;
-import com.gamedoora.model.dao.Roles;
+
 import java.text.MessageFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,7 +57,7 @@ public class RolesServicesController extends BaseController {
 	}
 
 	@GetMapping(value = "/", produces =  {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<List<Roles>> getAllRoles(@RequestParam(required = false) String name) {
+	public ResponseEntity<List<RoleDTO>> getAllRoles(@RequestParam(required = false) String name) {
 		return createResponse(rolesServicesAssembler.getAllRoles(name), HttpStatus.OK);
 	}
 }

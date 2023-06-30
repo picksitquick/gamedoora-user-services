@@ -1,9 +1,9 @@
 package com.gamedoora.backend.userservices.api;
 
 import com.gamedoora.backend.userservices.assembler.UserServicesAssembler;
-import com.gamedoora.backend.userservices.dto.UserDTO;
+import com.gamedoora.model.dto.UserDTO;
 import com.gamedoora.backend.userservices.exceptions.NotFoundException;
-import com.gamedoora.model.dao.Users;
+
 import java.text.MessageFormat;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +62,7 @@ public class UserServicesController extends BaseController {
   @GetMapping(
       value = "/",
       produces = {MediaType.APPLICATION_JSON_VALUE})
-  public ResponseEntity<List<Users>> getAllUsers(@RequestParam(required = false) String name) {
+  public ResponseEntity<List<UserDTO>> getAllUsers(@RequestParam(required = false) String name) {
     return createResponse(userServicesAssembler.getAllUsers(name), HttpStatus.OK);
   }
 }

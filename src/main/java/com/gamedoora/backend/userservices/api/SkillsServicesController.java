@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gamedoora.backend.userservices.assembler.SkillsServicesAssembler;
-import com.gamedoora.backend.userservices.dto.SkillsDTO;
-import com.gamedoora.model.dao.Skills;
+import com.gamedoora.model.dto.SkillsDTO;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -59,7 +58,7 @@ public class SkillsServicesController extends BaseController {
   @GetMapping(
       value = "/",
       produces = {MediaType.APPLICATION_JSON_VALUE})
-  public ResponseEntity<List<Skills>> getAllSkills(@RequestParam(required = false) String name) {
+  public ResponseEntity<List<SkillsDTO>> getAllSkills(@RequestParam(required = false) String name) {
 		return createResponse(skillsServicesAssembler.getAllSkills(name), HttpStatus.OK);
 	}
 }
