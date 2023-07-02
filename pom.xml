@@ -221,11 +221,24 @@
             </plugin>
         </plugins>
     </build>
-<distributionManagement>
-	  <repository>
-	    <id>codeartifact</id>
-	    <name>codeartifact</name>
-	    <url>https://gamedoora-727903310356.d.codeartifact.us-east-1.amazonaws.com/maven/Gamedoora/</url>
-	  </repository>
-</distributionManagement>
+
+    <!-- for  managing artifact upload to GitHub maven package manager-->
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub gamedoora Apache Maven Packages for user services</name>
+            <url>https://maven.pkg.github.com/gamedoora/gamedoora-user-services</url>
+        </repository>
+    </distributionManagement>
+
+
+    <!-- for downloading artifact from GitHub maven package manager-->
+    <repositories>
+        <repository>
+            <id>github</id>
+            <name>GitHub gamedoora Apache Maven Packages for model</name>
+            <url>https://maven.pkg.github.com/gamedoora/gamedoora-model</url>
+        </repository>
+    </repositories>
+
 </project>
