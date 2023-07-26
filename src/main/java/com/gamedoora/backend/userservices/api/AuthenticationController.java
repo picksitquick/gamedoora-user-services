@@ -1,5 +1,7 @@
 package com.gamedoora.backend.userservices.api;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,9 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 
+
 //@RestController
 //@RequestMapping("/api/auth")
-public class AuthenticationController {
+//public class AuthenticationController {
 
 //    @Autowired
 //    private FirebaseAuth firebaseAuth;
@@ -30,4 +33,4 @@ public class AuthenticationController {
 //        return user;
 //    }
 
-}
+//}
