@@ -1,7 +1,11 @@
 package com.gamedoora.backend.userservices.config;
 
 import com.google.common.collect.Maps;
+import java.util.Properties;
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -14,17 +18,13 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-import java.util.Properties;
-
 /**
  *
  * @author aprajshekhar
  */
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.gamedoora.backend.userservices.repository",
+@EnableJpaRepositories(basePackages = "com.gamedoora.backend.userservices.repository", 
     entityManagerFactoryRef = "primaryEntityManagerFactory",
     transactionManagerRef = "primaryTransactionManager")
 public class RelationalDbConfig {
