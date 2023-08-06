@@ -1,11 +1,12 @@
 //package com.gamedoora.backend.userservices.mapper;
-//
-//import com.gamedoora.model.dto.UserDTO;
+
 //import com.gamedoora.model.dao.Roles;
 //import com.gamedoora.model.dao.Skills;
 //import com.gamedoora.model.dao.UserRole;
 //import com.gamedoora.model.dao.UserSkills;
 //import com.gamedoora.model.dao.Users;
+//import com.gamedoora.model.dto.UserDTO;
+
 //import com.gamedoora.model.mapper.UserMapper;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@
 //import java.util.Date;
 //import java.util.List;
 //import java.util.Set;
-//import java.util.*;
+
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 //import static org.junit.jupiter.api.Assertions.assertNotNull;
 //import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -148,8 +149,8 @@
 //        // When
 //        Users testUser = userMapper.userDtoToUsers(userDto);
 //
-//        testUser.setUserRole(Set.of(userRole1 , userRole2));
-//        testUser.setUserSkills(Set.of(userSkills1 , userSkills2));
+//        testUser.setRole(Set.of(userRole1.getRoles() , userRole2.getRoles()));
+//        testUser.setSkills(Set.of(userSkills1.getSkills() , userSkills2.getSkills()));
 //
 //        // Then
 //        assertEquals(userDto.getEmail(), testUser.getEmail());
@@ -167,20 +168,21 @@
 //        assertEquals(userDto.getCurrentSignIp(), testUser.getCurrentSignIp());
 //        assertEquals(userDto.getCurrentSignIn(), testUser.getCurrentSignIn());
 //
-//        Set<UserRole> testRole = testUser.getUserRole();
-//        Set<UserSkills> testSkills = testUser.getUserSkills();
+//        Set<Roles> testRole = testUser.getRole();
+//        Set<Skills> testSkills = testUser.getSkills();
 //
-//        List<UserRole> testUserRoleList = new ArrayList<>(testRole);
-//        List<UserSkills> testUserSkillsList = new ArrayList<>(testSkills);
+//        List<Roles> testUserRoleList = new ArrayList<>(testRole);
+//        List<Skills> testUserSkillsList = new ArrayList<>(testSkills);
 //
 //        assertNotNull(testRole);
 //        assertNotNull(testSkills);
-//        assertTrue(testRole.contains(userRole1));
-//        assertTrue(testSkills.contains(userSkills2));
+//        assertTrue(testRole.contains(userRole1.getRoles()));
+//        assertTrue(testSkills.contains(userSkills2.getSkills()));
 //
-//        assertEquals(testUserSkillsList.get(1).getSkills().getName() , "Water");
-//        assertEquals(testUserSkillsList.get(0).getSkills().getName() , "Fire");
-//        assertEquals(testUserRoleList.get(0).getRoles().getName() , "Major");
+//        assertEquals(testUserSkillsList.get(1).getName() , "Water");
+//        assertEquals(testUserSkillsList.get(0).getName() , "Fire");
+//        assertEquals(testUserRoleList.get(0).getName() , "Major");
+
 //        assertEquals(testUser.getCreatedBy() , "GameDoora");
 //
 //    }

@@ -40,11 +40,11 @@ public class UserServicesController extends BaseController {
       produces = {MediaType.APPLICATION_JSON_VALUE})
   public ResponseEntity<UserDTO> updateUsers(
       @PathVariable("id") long id, @RequestBody UserDTO usersDto) {
-    UserDTO UserDTO = userServicesAssembler.updateUsers(id, usersDto);
-    if (null == UserDTO) {
+    UserDTO userDTO = userServicesAssembler.updateUsers(id, usersDto);
+    if (null == userDTO) {
       throw new NotFoundException(MessageFormat.format("User by id {0} not found", id));
     }
-    return createResponse(UserDTO, HttpStatus.OK);
+    return createResponse(userDTO, HttpStatus.OK);
   }
 
   @DeleteMapping("/{id}")
