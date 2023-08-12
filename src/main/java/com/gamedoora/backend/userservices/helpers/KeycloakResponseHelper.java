@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 @Slf4j
 @Component
@@ -16,7 +15,7 @@ public class KeycloakResponseHelper {
         add(201);
         add(204);
     }};
-    public String getUserIdFromResposne(Response keycloakResponse){
+    public String getUserIdFromResponse(Response keycloakResponse){
         checkStatus(keycloakResponse);
         return CreatedResponseUtil.getCreatedId(keycloakResponse);
     }

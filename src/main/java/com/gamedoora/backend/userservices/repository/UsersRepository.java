@@ -12,7 +12,13 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
 
 	List<Users> findByEmailContaining(String name);
 
-	Users findByFirstName(String firstName);
+	List<Users> findBySkills_Id(long id);
+
+	List<Users> findByRole_Id(long id);
+
+	List <Users> findByFirstName(String firstName);
 
 	List<Users> findBySkills_Name(String name);
+
+    List<Users> findByRole_Name(String name);
 }

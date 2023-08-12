@@ -1,11 +1,13 @@
 package com.gamedoora.backend.userservices.repository;
 
+import com.gamedoora.model.dao.Users;
 import com.gamedoora.model.dao.Roles;
 import com.gamedoora.model.dao.Skills;
 import com.gamedoora.model.dao.UserRole;
 import com.gamedoora.model.dao.UserSkills;
 import com.gamedoora.model.dao.Users;
 import org.aspectj.lang.annotation.Before;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,21 +48,20 @@ class UsersRepositoryTest {
         usersRepository.save(users);
 
         Optional<Users> dummy = usersRepository.findById(1L);
-        Users test = usersRepository.findByFirstName("ok");
-
+        List<Users> userValue = usersRepository.findByFirstName(users.getFirstName());
         List<Users> sample = usersRepository.findBySkills_Name("sample");
 
         assertNotNull(sample);
         assertNotNull(dummy);
-        assertNull(test);
+        assertNotNull(userValue);
     }
 
     @Test
     void findByName() {
         usersRepository.save(users);
-        Users userValue = usersRepository.findByFirstName(users.getFirstName());
+        List<Users> userValue = usersRepository.findByFirstName(users.getFirstName());
         assertNotNull(userValue);
-        assertEquals(userValue.getFirstName() , "Test");
+        assertEquals(userValue.get(0).getFirstName() , "Test");
     }
 
 }

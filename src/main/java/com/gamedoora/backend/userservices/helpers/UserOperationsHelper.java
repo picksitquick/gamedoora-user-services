@@ -8,7 +8,6 @@ import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class UserOperationsHelper {
         UserRepresentation userRepresentation = getUserRepresentationMapper()
                 .toUserRespresentation(userDto);
         return getKeycloakResponseHelper()
-                .getUserIdFromResposne(
+                .getUserIdFromResponse(
                         getKeyclockUsersResource().create(userRepresentation)
                 );
     }

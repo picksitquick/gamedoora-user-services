@@ -11,4 +11,6 @@ import com.gamedoora.model.dao.Roles;
 public interface RolesRepository extends JpaRepository<Roles, Long> {
 
 	List<Roles> findByNameContaining(String name);
+
+	List<Roles> findBySkills_Name(String name);
 }

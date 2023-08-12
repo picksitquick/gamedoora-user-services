@@ -60,4 +60,9 @@ public class RolesServicesController extends BaseController {
 	public ResponseEntity<List<RoleDTO>> getAllRoles(@RequestParam(required = false) String name) {
 		return createResponse(rolesServicesAssembler.getAllRoles(name), HttpStatus.OK);
 	}
+
+	@GetMapping(value = "/", produces =  {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<List<RoleDTO>> getAllRolesBySkillName(@RequestParam(required = false) String name) {
+		return createResponse(rolesServicesAssembler.getAllRolesBySkillName(name), HttpStatus.OK);
+	}
 }

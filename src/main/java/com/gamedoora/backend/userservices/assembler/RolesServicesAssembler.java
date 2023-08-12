@@ -72,4 +72,12 @@ public class RolesServicesAssembler {
 
     return roleDTOList;
   }
+
+  public List<RoleDTO> getAllRolesBySkillName(String name) {
+    List<RoleDTO> roleDTOList = new ArrayList<>();
+    if (name == null) rolesRepository.findAll().forEach(roles -> roleDTOList.add(getRolesMapper().roleToRoleDto(roles)));
+    else rolesRepository.findBySkills_Name(name).forEach(roles -> roleDTOList.add(getRolesMapper().roleToRoleDto(roles)));
+
+    return roleDTOList;
+  }
 }

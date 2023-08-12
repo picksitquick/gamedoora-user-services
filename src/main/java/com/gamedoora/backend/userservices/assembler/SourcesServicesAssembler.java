@@ -73,4 +73,14 @@ public class SourcesServicesAssembler {
     sourcesRepository.findByNameContaining(name).forEach(sources -> sourcesDto.add(getSourceMapper().sourceToSourceDTO(sources)));
     return sourcesDto;
   }
+
+  public List<SourceDTO> getAllSourcesBySkillsName(String name) {
+    List<SourceDTO> sourcesDto = new ArrayList<>();
+    if (name == null) {
+      sourcesRepository.findAll().forEach(sources -> sourcesDto.add(getSourceMapper().sourceToSourceDTO(sources)));
+      return sourcesDto;
+    }
+    sourcesRepository.findBySkills_Name(name).forEach(sources -> sourcesDto.add(getSourceMapper().sourceToSourceDTO(sources)));
+    return sourcesDto;
+  }
 }

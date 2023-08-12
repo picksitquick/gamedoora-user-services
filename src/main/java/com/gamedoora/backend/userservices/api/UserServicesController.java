@@ -65,4 +65,25 @@ public class UserServicesController extends BaseController {
   public ResponseEntity<List<UserDTO>> getAllUsers(@RequestParam(required = false) String name) {
     return createResponse(userServicesAssembler.getAllUsers(name), HttpStatus.OK);
   }
+
+  @GetMapping(
+          value = "/{name}",
+          produces = {MediaType.APPLICATION_JSON_VALUE})
+  public ResponseEntity<List<UserDTO>> getAllUsersByName(@RequestParam(required = false) String name) {
+    return createResponse(userServicesAssembler.getAllUsersByName(name), HttpStatus.OK);
+  }
+
+  @GetMapping(
+          value = "/skills/{name}",
+          produces = {MediaType.APPLICATION_JSON_VALUE})
+  public ResponseEntity<List<UserDTO>> getAllUsersBySkillsName(@RequestParam(required = false) String name) {
+    return createResponse(userServicesAssembler.getAllUsersBySkillsName(name), HttpStatus.OK);
+  }
+
+  @GetMapping(
+          value = "/roles/{name}",
+          produces = {MediaType.APPLICATION_JSON_VALUE})
+  public ResponseEntity<List<UserDTO>> getAllUsersByRoles(@RequestParam(required = false) String name) {
+    return createResponse(userServicesAssembler.getAllUsersByRoleName(name), HttpStatus.OK);
+  }//confirm mapping
 }

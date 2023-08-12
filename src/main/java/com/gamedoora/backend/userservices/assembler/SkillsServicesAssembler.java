@@ -75,4 +75,34 @@ public class SkillsServicesAssembler {
     skillsRepository.findByNameContaining(name).forEach(skills -> skillsDTOList.add(getSkillsMapper().skillsToSkillsDTO(skills)));
     return skillsDTOList;
   }
+
+  public List<SkillsDTO> getAllSkillsByRolesName(String name) {
+    List<SkillsDTO> skillsDTOList = new ArrayList<>();
+    if (name == null) {
+      skillsRepository.findAll().forEach(skills -> skillsDTOList.add(getSkillsMapper().skillsToSkillsDTO(skills)));
+      return skillsDTOList;
+    }
+    skillsRepository.findByRoles_Name(name).forEach(skills -> skillsDTOList.add(getSkillsMapper().skillsToSkillsDTO(skills)));
+    return skillsDTOList;
+  }
+
+  public List<SkillsDTO> getAllSkillsByUserName(String name) {
+    List<SkillsDTO> skillsDTOList = new ArrayList<>();
+    if (name == null) {
+      skillsRepository.findAll().forEach(skills -> skillsDTOList.add(getSkillsMapper().skillsToSkillsDTO(skills)));
+      return skillsDTOList;
+    }
+    skillsRepository.findByUsers_FirstName(name).forEach(skills -> skillsDTOList.add(getSkillsMapper().skillsToSkillsDTO(skills)));
+    return skillsDTOList;
+  }
+
+  public List<SkillsDTO> getAllSkillsBySourceName(String name) {
+    List<SkillsDTO> skillsDTOList = new ArrayList<>();
+    if (name == null) {
+      skillsRepository.findAll().forEach(skills -> skillsDTOList.add(getSkillsMapper().skillsToSkillsDTO(skills)));
+      return skillsDTOList;
+    }
+    skillsRepository.findBySources_Name(name).forEach(skills -> skillsDTOList.add(getSkillsMapper().skillsToSkillsDTO(skills)));
+    return skillsDTOList;
+  }
 }

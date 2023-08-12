@@ -11,4 +11,6 @@ import com.gamedoora.model.dao.Sources;
 public interface SourcesRepository extends JpaRepository<Sources, Long> {
 
 	List<Sources> findByNameContaining(String name);
+
+	List<Sources> findBySkills_Name(String name);
 }

@@ -61,4 +61,25 @@ public class SkillsServicesController extends BaseController {
   public ResponseEntity<List<SkillsDTO>> getAllSkills(@RequestParam(required = false) String name) {
 		return createResponse(skillsServicesAssembler.getAllSkills(name), HttpStatus.OK);
 	}
+
+	@GetMapping(
+			value = "/users/{name}",
+			produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<List<SkillsDTO>> getAllSkillsByUserName(@RequestParam(required = false) String name) {
+		return createResponse(skillsServicesAssembler.getAllSkillsByUserName(name), HttpStatus.OK);
+	}
+
+	@GetMapping(
+			value = "/roles/{name}",
+			produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<List<SkillsDTO>> getAllSkillsByRoleName(@RequestParam(required = false) String name) {
+		return createResponse(skillsServicesAssembler.getAllSkillsByRolesName(name), HttpStatus.OK);
+	}
+
+	@GetMapping(
+			value = "/sources/{name}",
+			produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<List<SkillsDTO>> getAllSkillsBySourceName(@RequestParam(required = false) String name) {
+		return createResponse(skillsServicesAssembler.getAllSkillsBySourceName(name), HttpStatus.OK);
+	}
 }

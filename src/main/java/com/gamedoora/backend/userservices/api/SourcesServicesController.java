@@ -54,4 +54,11 @@ public class SourcesServicesController extends BaseController {
   public ResponseEntity<List<SourceDTO>> getAllSources(@RequestParam(required = false) String name) {
     return createResponse(sourcesServicesAssembler.getAllSources(name), HttpStatus.OK);
 	}
+
+    @GetMapping(
+            value = "/skills/{id}",
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<List<SourceDTO>> getAllBySkillName(@RequestParam(required = true) String name){
+      return createResponse(sourcesServicesAssembler.getAllSourcesBySkillsName(name), HttpStatus.OK);
+    }
 }
