@@ -18,4 +18,6 @@ public interface SkillsRepository extends JpaRepository<Skills, Long> {
 	List<Skills> findByRoles_Name(String name);
 
 	List<Skills> findByUsers_FirstName(String name);
+
+	List<Skills> findByUsers_Email(String email);
 }

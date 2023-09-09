@@ -3,6 +3,7 @@ package com.gamedoora.backend.userservices.assembler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.gamedoora.model.mapper.RolesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,5 +80,13 @@ public class RolesServicesAssembler {
     else rolesRepository.findBySkills_Name(name).forEach(roles -> roleDTOList.add(getRolesMapper().roleToRoleDto(roles)));
 
     return roleDTOList;
+  }
+
+  public List<RoleDTO> getRolesByUserEmail(String email){
+
+    return rolesRepository.findByUsers_Email(email).stream().map(
+            roles -> getRolesMapper().roleToRoleDto(roles)
+            ).collect(Collectors.toList()
+            );
   }
 }

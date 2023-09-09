@@ -26,18 +26,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/roles")
 public class RolesServicesController extends BaseController {
 
-	@Autowired
+
+	private
 	RolesServicesAssembler rolesServicesAssembler;
 
 	@PostMapping(value = "/", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces =  {MediaType.APPLICATION_JSON_VALUE} )
 	public ResponseEntity<RoleDTO> createRoles(@RequestBody RoleDTO rolesDto) {
-		return createResponse(rolesServicesAssembler.createRoles(rolesDto), HttpStatus.CREATED);
+		return createResponse(getRolesServicesAssembler().createRoles(rolesDto), HttpStatus.CREATED);
 
 	}
 
 	@PutMapping(value = "/{id}" , consumes = {MediaType.APPLICATION_JSON_VALUE}, produces =  {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<RoleDTO> updateRoles(@PathVariable("id") long id, @RequestBody RoleDTO rolesDto) {
-		RoleDTO roleDTO = rolesServicesAssembler.updateRoles(id, rolesDto);
+		RoleDTO roleDTO = getRolesServicesAssembler().updateRoles(id, rolesDto);
     if(null == roleDTO){
       throw new NotFoundException(MessageFormat.format("Role by id {0} not found", id)); 
     }
@@ -46,23 +47,36 @@ public class RolesServicesController extends BaseController {
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<HttpStatus> deleteRoles(@PathVariable("id") long id) {
-		 rolesServicesAssembler.deleteRoles(id);
+		 getRolesServicesAssembler().deleteRoles(id);
      return createResponse(null, HttpStatus.NO_CONTENT);
 	}
 
 	@DeleteMapping(value = "/")
 	public ResponseEntity<HttpStatus> deleteAllRoles() {
-		rolesServicesAssembler.deleteAllRoles();
+		getRolesServicesAssembler().deleteAllRoles();
     return createResponse(null, HttpStatus.NO_CONTENT);
 	}
 
 	@GetMapping(value = "/", produces =  {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<List<RoleDTO>> getAllRoles(@RequestParam(required = false) String name) {
-		return createResponse(rolesServicesAssembler.getAllRoles(name), HttpStatus.OK);
+		return createResponse(getRolesServicesAssembler().getAllRoles(name), HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/", produces =  {MediaType.APPLICATION_JSON_VALUE})
+	@GetMapping(value = "/skills", produces =  {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<List<RoleDTO>> getAllRolesBySkillName(@RequestParam(required = false) String name) {
-		return createResponse(rolesServicesAssembler.getAllRolesBySkillName(name), HttpStatus.OK);
+		return createResponse(getRolesServicesAssembler().getAllRolesBySkillName(name), HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/users", produces =  {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<List<RoleDTO>> getAllRolesByEmail(@RequestParam(required = true) String email) {
+		return createResponse(getRolesServicesAssembler().getRolesByUserEmail(email), HttpStatus.OK);
+	}
+
+	public RolesServicesAssembler getRolesServicesAssembler() {
+		return rolesServicesAssembler;
+	}
+	@Autowired
+	public void setRolesServicesAssembler(RolesServicesAssembler rolesServicesAssembler) {
+		this.rolesServicesAssembler = rolesServicesAssembler;
 	}
 }

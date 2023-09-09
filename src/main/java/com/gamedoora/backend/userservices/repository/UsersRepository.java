@@ -11,7 +11,7 @@ import com.gamedoora.model.dao.Users;
 public interface UsersRepository extends JpaRepository<Users, Long> {
 
 	List<Users> findByEmailContaining(String name);
-
+	Users findByEmail(String email);
 	List<Users> findBySkills_Id(long id);
 
 	List<Users> findByRole_Id(long id);

@@ -13,4 +13,7 @@ public interface RolesRepository extends JpaRepository<Roles, Long> {
 	List<Roles> findByNameContaining(String name);
 
 	List<Roles> findBySkills_Name(String name);
+
+	List<Roles> findByUsers_Email(String email);
+
 }

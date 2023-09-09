@@ -54,5 +54,12 @@ class UsersRepositoryTest {
         assertNotNull(userValue);
         assertEquals(userValue.get(0).getFirstName() , "Test");
     }
+    @Test
+    void findByEmail() {
+        usersRepository.save(users);
+        Users userValue = usersRepository.findByEmail(users.getEmail());
+        assertNotNull(userValue);
+        assertEquals(userValue.getEmail() , "test@gmail.com");
+    }
 
 }

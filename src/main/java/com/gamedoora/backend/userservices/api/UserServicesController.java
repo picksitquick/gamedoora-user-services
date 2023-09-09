@@ -24,14 +24,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserServicesController extends BaseController {
 
-  @Autowired UserServicesAssembler userServicesAssembler;
+
+  private UserServicesAssembler userServicesAssembler;
 
   @PostMapping(
       value = "/",
       consumes = {MediaType.APPLICATION_JSON_VALUE},
       produces = {MediaType.APPLICATION_JSON_VALUE})
   public ResponseEntity<UserDTO> createUsers(@RequestBody UserDTO usersDto) {
-    return createResponse(userServicesAssembler.createUsers(usersDto), HttpStatus.CREATED);
+    return createResponse(getUserServicesAssembler().createUsers(usersDto), HttpStatus.CREATED);
   }
 
   @PutMapping(
@@ -39,8 +40,8 @@ public class UserServicesController extends BaseController {
       consumes = {MediaType.APPLICATION_JSON_VALUE},
       produces = {MediaType.APPLICATION_JSON_VALUE})
   public ResponseEntity<UserDTO> updateUsers(
-      @PathVariable("id") long id, @RequestBody UserDTO usersDto) {
-    UserDTO userDTO = userServicesAssembler.updateUsers(id, usersDto);
+          @PathVariable("id") long id, @RequestBody UserDTO usersDto) {
+    UserDTO userDTO = getUserServicesAssembler().updateUsers(id, usersDto);
     if (null == userDTO) {
       throw new NotFoundException(MessageFormat.format("User by id {0} not found", id));
     }
@@ -49,13 +50,13 @@ public class UserServicesController extends BaseController {
 
   @DeleteMapping("/{id}")
   public ResponseEntity<HttpStatus> deleteUsers(@PathVariable("id") long id) {
-    userServicesAssembler.deleteUsers(id);
+    getUserServicesAssembler().deleteUsers(id);
     return createResponse(null, HttpStatus.NO_CONTENT);
   }
 
   @DeleteMapping("/")
   public ResponseEntity<HttpStatus> deleteAllUsers() {
-    userServicesAssembler.deleteAllUsers();
+    getUserServicesAssembler().deleteAllUsers();
     return createResponse(null, HttpStatus.NO_CONTENT);
   }
 
@@ -63,27 +64,41 @@ public class UserServicesController extends BaseController {
       value = "/",
       produces = {MediaType.APPLICATION_JSON_VALUE})
   public ResponseEntity<List<UserDTO>> getAllUsers(@RequestParam(required = false) String name) {
-    return createResponse(userServicesAssembler.getAllUsers(name), HttpStatus.OK);
+    return createResponse(getUserServicesAssembler().getAllUsers(name), HttpStatus.OK);
   }
 
   @GetMapping(
           value = "/{name}",
           produces = {MediaType.APPLICATION_JSON_VALUE})
-  public ResponseEntity<List<UserDTO>> getAllUsersByName(@RequestParam(required = false) String name) {
-    return createResponse(userServicesAssembler.getAllUsersByName(name), HttpStatus.OK);
+  public ResponseEntity<List<UserDTO>> getAllUsersByName(@PathVariable String name) {
+    return createResponse(getUserServicesAssembler().getAllUsersByName(name), HttpStatus.OK);
   }
 
   @GetMapping(
           value = "/skills/{name}",
           produces = {MediaType.APPLICATION_JSON_VALUE})
-  public ResponseEntity<List<UserDTO>> getAllUsersBySkillsName(@RequestParam(required = false) String name) {
-    return createResponse(userServicesAssembler.getAllUsersBySkillsName(name), HttpStatus.OK);
+  public ResponseEntity<List<UserDTO>> getAllUsersBySkillsName(@PathVariable String name) {
+    return createResponse(getUserServicesAssembler().getAllUsersBySkillsName(name), HttpStatus.OK);
   }
 
   @GetMapping(
           value = "/roles/{name}",
           produces = {MediaType.APPLICATION_JSON_VALUE})
-  public ResponseEntity<List<UserDTO>> getAllUsersByRoles(@RequestParam(required = false) String name) {
-    return createResponse(userServicesAssembler.getAllUsersByRoleName(name), HttpStatus.OK);
+  public ResponseEntity<List<UserDTO>> getAllUsersByRoles(@PathVariable String name) {
+    return createResponse(getUserServicesAssembler().getAllUsersByRoleName(name), HttpStatus.OK);
   }//confirm mapping
+  @GetMapping(
+          value = "/email",
+          produces = {MediaType.APPLICATION_JSON_VALUE})
+  public ResponseEntity<UserDTO> getUserByEmail(@RequestParam(required = true) String email) {
+    return createResponse(getUserServicesAssembler().getUserByEmail(email), HttpStatus.OK);
+  }
+
+  public UserServicesAssembler getUserServicesAssembler() {
+    return userServicesAssembler;
+  }
+  @Autowired
+  public void setUserServicesAssembler(UserServicesAssembler userServicesAssembler) {
+    this.userServicesAssembler = userServicesAssembler;
+  }
 }

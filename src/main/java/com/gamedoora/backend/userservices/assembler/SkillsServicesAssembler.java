@@ -3,6 +3,7 @@ package com.gamedoora.backend.userservices.assembler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.gamedoora.model.mapper.SkillsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +87,11 @@ public class SkillsServicesAssembler {
     return skillsDTOList;
   }
 
+  public List<SkillsDTO> getSkillsByEmail(String email) {
+      return skillsRepository.findByUsers_Email(email).stream()
+              .map(skills -> getSkillsMapper().skillsToSkillsDTO(skills))
+              .collect(Collectors.toList());
+  }
   public List<SkillsDTO> getAllSkillsByUserName(String name) {
     List<SkillsDTO> skillsDTOList = new ArrayList<>();
     if (name == null) {
