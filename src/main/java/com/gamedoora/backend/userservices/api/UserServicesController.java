@@ -73,7 +73,12 @@ public class UserServicesController extends BaseController {
   public ResponseEntity<List<UserDTO>> getAllUsersByName(@PathVariable String name) {
     return createResponse(getUserServicesAssembler().getAllUsersByName(name), HttpStatus.OK);
   }
-
+  @GetMapping(
+          value = "/name/{lastName}",
+          produces = {MediaType.APPLICATION_JSON_VALUE})
+  public ResponseEntity<List<UserDTO>> getAllUsersByLastName(@PathVariable String lastName) {
+    return createResponse(getUserServicesAssembler().getUsersByLastName(lastName), HttpStatus.OK);
+  }
   @GetMapping(
           value = "/skills/{name}",
           produces = {MediaType.APPLICATION_JSON_VALUE})

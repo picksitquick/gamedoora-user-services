@@ -26,6 +26,7 @@ class UsersRepositoryTest {
         users = Users.builder()
                 .id(1L)
                 .firstName("Test")
+                .lastName("doe")
                 .email("test@gmail.com")
                 .providerToken("")//required fields while building objects
                 .build();
@@ -62,4 +63,11 @@ class UsersRepositoryTest {
         assertEquals(userValue.getEmail() , "test@gmail.com");
     }
 
+    @Test
+    void findByLastName() {
+        usersRepository.save(users);
+        List<Users> userValue = usersRepository.findByLastName(users.getLastName());
+        assertNotNull(userValue);
+        assertEquals(userValue.get(0).getLastName() , "doe");
+    }
 }

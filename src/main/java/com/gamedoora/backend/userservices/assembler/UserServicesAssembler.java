@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class UserServicesAssembler {
@@ -114,6 +115,13 @@ public class UserServicesAssembler {
 public UserDTO getUserByEmail(String email){
     return getUserMapper().usersToUserDTO(getUsersRepository().findByEmail(email));
 }
+
+  public List<UserDTO> getUsersByLastName(String lastName){
+    return getUsersRepository().findByLastName(lastName).stream().map(
+            users -> getUserMapper().usersToUserDTO(users)
+    ).collect(Collectors.toList());
+  }
+
   public List<UserDTO> getAllUsersByName(String name){
     List<UserDTO> userDtoList = new ArrayList<>();
     if (name == null) {
