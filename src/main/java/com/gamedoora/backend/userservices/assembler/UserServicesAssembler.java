@@ -76,13 +76,13 @@ public class UserServicesAssembler {
     return userDto;
   }
 
-  public UserDTO updateUsers(long id, UserDTO userDto) {
+  public UserDTO updateUsers(String emailId, UserDTO userDto) {
 
-    Optional<Users> usersRes = usersRepository.findById(id);
-    if (usersRes.isPresent()) {
+    Users usersRes = usersRepository.findByEmail(emailId);
+    if (usersRes.getEmail() == null) {
       return null;
     }
-    Users users = usersRes.get();
+    Users users = new Users();
     users.setEmail(userDto.getEmail());
     users.setFirstName(userDto.getFirstName());
     users.setLastName(userDto.getLastName());
@@ -91,13 +91,13 @@ public class UserServicesAssembler {
     return userDto;
   }
 
-  public void deleteUsers(long id) {
-    userOperationsHelper.deleteUser(String.valueOf(id));
-    getUsersRepository().deleteById(id);
+  public void deleteUsers(String emailId) {
+    userOperationsHelper.deleteUser(emailId);
+    getUsersRepository().deleteByEmailId(emailId);
   }
 
   public void deleteAllUsers() {
-    usersRepository.findAll().forEach(users -> userOperationsHelper.deleteUser(String.valueOf(users.getId())));
+    usersRepository.findAll().forEach(users -> userOperationsHelper.deleteUser(String.valueOf(users.getEmail())));
     //verify the behaviour in case of exception and define whether to continue the process or roll-back
     getUsersRepository().deleteAll();
   }
@@ -132,24 +132,33 @@ public UserDTO getUserByEmail(String email){
     return userDtoList.isEmpty() ? null : userDtoList;
   }
 
-  public List<UserDTO> getAllUsersBySkillsName(String name){
+  public List<UserDTO> getAllUsersBySkillsName(String emailId){
     List<UserDTO> userDtoList = new ArrayList<>();
-    if (name == null) {
+    if (emailId == null) {
       usersRepository.findAll().forEach(user -> userDtoList.add(getUserMapper().usersToUserDTO(user)));
     } else {
-      usersRepository.findBySkills_Name(name).forEach(user -> userDtoList.add(getUserMapper().usersToUserDTO(user)));;
+      usersRepository.findBySkills_Name(emailId).forEach(user -> userDtoList.add(getUserMapper().usersToUserDTO(user)));;
     }
     return userDtoList.isEmpty() ? null : userDtoList;
   }
 
-  public List<UserDTO> getAllUsersByRoleName(String name){
+  public List<UserDTO> getAllUsersByRoleName(String emailId){
     List<UserDTO> userDtoList = new ArrayList<>();
-    if (name == null) {
+    if (emailId == null) {
       usersRepository.findAll().forEach(user -> userDtoList.add(getUserMapper().usersToUserDTO(user)));
     } else {
-      usersRepository.findByRole_Name(name).forEach(user -> userDtoList.add(getUserMapper().usersToUserDTO(user)));;
+      usersRepository.findByRole_Name(emailId).forEach(user -> userDtoList.add(getUserMapper().usersToUserDTO(user)));;
     }
     return userDtoList.isEmpty() ? null : userDtoList;
   }
 
+  public List<UserDTO> getAllUsersByStudio(String emailId){
+      List<UserDTO> userDTOList = new ArrayList<>();
+      if(emailId == null){
+          usersRepository.findAll().forEach(user -> userDTOList.add(getUserMapper().usersToUserDTO(user)));
+      } else{
+          usersRepository.findByStudiosSet_EmailId(emailId).forEach(users -> userDTOList.add(getUserMapper().usersToUserDTO(users)));
+      }
+      return userDTOList.isEmpty() ? null : userDTOList;
+  }
 }
