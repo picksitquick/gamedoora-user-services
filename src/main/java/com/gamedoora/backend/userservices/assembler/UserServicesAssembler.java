@@ -93,7 +93,7 @@ public class UserServicesAssembler {
 
   public void deleteUsers(String emailId) {
     userOperationsHelper.deleteUser(emailId);
-    getUsersRepository().deleteByEmailId(emailId);
+    getUsersRepository().deleteById(emailId);
   }
 
   public void deleteAllUsers() {

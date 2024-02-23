@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.gamedoora.model.dao.Users;
 
 @Repository
-public interface UsersRepository extends JpaRepository<Users, Long> {
+public interface UsersRepository extends JpaRepository<Users, String> {
 
 	List<Users> findByEmailContaining(String emailId);
 
@@ -25,6 +25,4 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
     List<Users> findByRole_Name(String name);
 
 	List<Users> findByStudiosSet_EmailId(String emailId);
-
-	void deleteByEmailId(String emailId);
 }

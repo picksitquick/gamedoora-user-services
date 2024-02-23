@@ -84,7 +84,7 @@ public class RolesServicesAssembler {
 
   public List<RoleDTO> getRolesByUserEmail(String email){
 
-    return rolesRepository.findByUsers_Email(email).stream().map(
+    return rolesRepository.findByUsers_EmailId(email).stream().map(
             roles -> getRolesMapper().roleToRoleDto(roles)
             ).collect(Collectors.toList()
             );
