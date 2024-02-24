@@ -9,20 +9,21 @@ import com.gamedoora.model.dao.Users;
 
 @Repository
 public interface UsersRepository extends JpaRepository<Users, String> {
+	Users findByEmailId(String emailId);
 
-	List<Users> findByEmailContaining(String emailId);
+	List<Users> findByRole_Id(long id);
 
-	Users findByEmail(String email);
+	List<Users> findBySkills_Id(long id);
 
-	List<Users> findBySkills_Id(String emailId);
+	List<Users> findByFirstName(String firstName);
 
-	List<Users> findByRole_Id(String emailId);
+	List<Users> findByLastName(String lastName);
 
-	List <Users> findByFirstName(String firstName);
-	List <Users> findByLastName(String lastName);
 	List<Users> findBySkills_Name(String name);
 
-    List<Users> findByRole_Name(String name);
+	List<Users> findByRole_Name(String name);
 
 	List<Users> findByStudiosSet_EmailId(String emailId);
+
+	List<Users> findListByEmailId(String emailId);
 }

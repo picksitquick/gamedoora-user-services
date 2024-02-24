@@ -78,7 +78,7 @@ public class UserServicesAssembler {
 
   public UserDTO updateUsers(String emailId, UserDTO userDto) {
 
-    Users usersRes = usersRepository.findByEmail(emailId);
+    Users usersRes = usersRepository.findByEmailId(emailId);
     if (usersRes.getEmail() == null) {
       return null;
     }
@@ -106,14 +106,14 @@ public class UserServicesAssembler {
 
     List<UserDTO> usersDto = new ArrayList<>();
     if (email == null) usersRepository.findAll().forEach(user -> usersDto.add(getUserMapper().usersToUserDTO(user)));
-    else usersRepository.findByEmailContaining(email).forEach(user -> usersDto.add(getUserMapper().usersToUserDTO(user)));
+    else usersRepository.findListByEmailId(email).forEach(user -> usersDto.add(getUserMapper().usersToUserDTO(user)));
     if (usersDto.isEmpty()) {
       return null;
     }
     return usersDto;
   }
 public UserDTO getUserByEmail(String email){
-    return getUserMapper().usersToUserDTO(getUsersRepository().findByEmail(email));
+    return getUserMapper().usersToUserDTO(getUsersRepository().findByEmailId(email));
 }
 
   public List<UserDTO> getUsersByLastName(String lastName){

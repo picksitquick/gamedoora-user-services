@@ -20,14 +20,22 @@ class UsersRepositoryTest {
 
     private Users users = new Users();
 
+    private Users testUsers = new Users();
+
     @BeforeEach
     void setup(){
 
         users = Users.builder()
-                .id(1L)
+                .emailId("test@gamedoora.com")
                 .firstName("Test")
                 .lastName("doe")
-                .email("test@gmail.com")
+                .providerToken("")//required fields while building objects
+                .build();
+
+        testUsers = Users.builder()
+                .emailId("test1@gamedoora.com")
+                .firstName("Test2")
+                .lastName("joe")
                 .providerToken("")//required fields while building objects
                 .build();
     }
@@ -38,7 +46,7 @@ class UsersRepositoryTest {
 
         usersRepository.save(users);
 
-        Optional<Users> dummy = usersRepository.findById(1L);
+        Optional<Users> dummy = usersRepository.findById("test@gamedoora.com");
         List<Users> test = usersRepository.findByFirstName("ok");
 
         List<Users> sample = usersRepository.findBySkills_Name("sample");
@@ -58,9 +66,9 @@ class UsersRepositoryTest {
     @Test
     void findByEmail() {
         usersRepository.save(users);
-        Users userValue = usersRepository.findByEmail(users.getEmail());
+        Users userValue = usersRepository.findByEmailId(users.getEmail());
         assertNotNull(userValue);
-        assertEquals(userValue.getEmail() , "test@gmail.com");
+        assertEquals(userValue.getEmail() , "test@gamedoora.com");
     }
 
     @Test
@@ -69,5 +77,14 @@ class UsersRepositoryTest {
         List<Users> userValue = usersRepository.findByLastName(users.getLastName());
         assertNotNull(userValue);
         assertEquals(userValue.get(0).getLastName() , "doe");
+    }
+
+    @Test
+    void findListOfUsers(){
+        usersRepository.save(users);
+        usersRepository.save(testUsers);
+        List<Users> userList = usersRepository.findListByEmailId("test1@gamedoora.com");
+        assertNotNull(userList);
+        assertEquals(userList.size() , 1);
     }
 }

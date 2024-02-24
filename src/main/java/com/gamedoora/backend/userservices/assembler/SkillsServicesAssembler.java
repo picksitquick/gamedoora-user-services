@@ -88,7 +88,7 @@ public class SkillsServicesAssembler {
   }
 
   public List<SkillsDTO> getSkillsByEmail(String email) {
-      return skillsRepository.findByUsers_Email(email).stream()
+      return skillsRepository.findByUsers_EmailId(email).stream()
               .map(skills -> getSkillsMapper().skillsToSkillsDTO(skills))
               .collect(Collectors.toList());
   }
