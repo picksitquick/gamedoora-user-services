@@ -145,10 +145,8 @@ public class PropertiesConfig {
         return keycloakRealm;
     }
 
-    @Value("${userservice.keycloak.server.realm}")
-    public void setKeycloakRealm(String keycloakRealm) {
-        this.keycloakRealm = keycloakRealm;
-    }
+    @Value("${keycloak.server.realm}")
+    public void setKeycloakRealm(String keycloakRealm) {this.keycloakRealm = keycloakRealm;}
 
     public String getKeycloakClientId() {
         return keycloakClientId;

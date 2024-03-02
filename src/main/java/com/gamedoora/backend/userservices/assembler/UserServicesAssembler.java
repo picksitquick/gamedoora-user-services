@@ -79,11 +79,11 @@ public class UserServicesAssembler {
   public UserDTO updateUsers(String emailId, UserDTO userDto) {
 
     Users usersRes = usersRepository.findByEmailId(emailId);
-    if (usersRes.getEmail() == null) {
+    if (usersRes.getEmailId() == null) {
       return null;
     }
     Users users = new Users();
-    users.setEmail(userDto.getEmail());
+    users.setEmailId(userDto.getEmail());
     users.setFirstName(userDto.getFirstName());
     users.setLastName(userDto.getLastName());
     usersRepository.save(users);
@@ -97,7 +97,7 @@ public class UserServicesAssembler {
   }
 
   public void deleteAllUsers() {
-    usersRepository.findAll().forEach(users -> userOperationsHelper.deleteUser(String.valueOf(users.getEmail())));
+    usersRepository.findAll().forEach(users -> userOperationsHelper.deleteUser(String.valueOf(users.getEmailId())));
     //verify the behaviour in case of exception and define whether to continue the process or roll-back
     getUsersRepository().deleteAll();
   }

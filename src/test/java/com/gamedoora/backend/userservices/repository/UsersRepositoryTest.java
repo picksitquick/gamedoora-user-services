@@ -66,9 +66,9 @@ class UsersRepositoryTest {
     @Test
     void findByEmail() {
         usersRepository.save(users);
-        Users userValue = usersRepository.findByEmailId(users.getEmail());
+        Users userValue = usersRepository.findByEmailId(users.getEmailId());
         assertNotNull(userValue);
-        assertEquals(userValue.getEmail() , "test@gamedoora.com");
+        assertEquals(userValue.getEmailId() , "test@gamedoora.com");
     }
 
     @Test
