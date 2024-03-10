@@ -6,11 +6,11 @@ After=syslog.target gamedoora-config-server.service
 User=gamedoora
 ExecStart=/opt/gamedoora/gamedoora-user-services.jar
 SuccessExitStatus=143
-Environment="CONFIG_SERVER=http://localhost:8888"
+Environment="CONFIG_SERVER=http://localhost:8888 LOG_PATH=/var/log/gamedoora/user_service_logs"
 
 # Redirect standard output and standard error to the main log file.
-StandardOutput=file:/var/log/gamedoora/user_service_logs/user_services.log
-StandardError=file:/var/log/gamedoora/user_service_logs/user_services.log
+# StandardOutput=file:/var/log/gamedoora/user_service_logs/user_services.log
+# StandardError=file:/var/log/gamedoora/user_service_logs/user_services.log
 
 # Rotate log based on days, capacity, file size, compress, etc.
 # LogsDirectory=/gamedoora/user_service_logs
