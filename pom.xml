@@ -67,9 +67,9 @@
         
         </dependency>
         <dependency>
-            <groupId>com.gamedoora</groupId>
+            <groupId>com.github.gamedoora</groupId>
             <artifactId>gamedoora-model</artifactId>
-            <version>0.2.2</version>
+            <version>0.2.3</version>
         </dependency>
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
@@ -249,11 +249,17 @@
 
     <!-- for downloading artifact from GitHub maven package manager-->
     <repositories>
-        <repository>
-            <id>github</id>
-            <name>GitHub gamedoora Apache Maven Packages for model</name>
-            <url>https://maven.pkg.github.com/gamedoora/gamedoora-model</url>
-        </repository>
-    </repositories>
+<!--        <repository>-->
+<!--            <id>github</id>-->
+<!--            <name>GitHub gamedoora Apache Maven Packages for model</name>-->
+<!--            <url>https://maven.pkg.github.com/gamedoora/gamedoora-model</url>-->
+<!--        </repository>-->
+
+            <repository>
+                <id>jitpack.io</id>
+                <url>https://jitpack.io</url>
+            </repository>
+        </repositories>
+
 
 </project>
